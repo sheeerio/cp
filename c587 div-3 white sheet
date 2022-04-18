@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cstdio>
+using namespace std;
+ 
+int main(){
+    cin.sync_with_stdio(0);
+    cin.tie(0);
+/*
+    freopen("whitesheet.in", "r", stdin);
+    freopen("whitesheet.out", "w", stdout);
+*/
+    int x1, y11, x2, y2; // original sheet 
+    cin >> x1 >> y11 >> x2 >> y2;
+ 
+    for(int bs = 0; bs <2; bs++){ //handling black sheets
+        int x3, y3, x4, y4;
+        cin >> x3 >> y3 >> x4 >> y4;
+ 
+        // check for rectangle completely covering white sheet
+        if(x3 <= x1 && x2 <= x4 && y3 <= y11 && y2 <= y4){
+            cout << "NO" << endl;
+            return 0;
+        }
+ 
+        // black sheet covers vertical part of white sheet
+        if(y3 <= y11 && y2 <= y4){
+            
+            // left part
+            if(x3 <= x1 && x1 <= x4) x1 = x4;
+ 
+            // right part
+            if(x3 <= x2 && x2 <= x4) x2 = x3;
+ 
+        }
+        // black sheet covers horizontal part of white sheet
+        if(x3 <= x1 && x2 <= x4){
+ 
+            // top part
+            if(y3 <= y2 && y2 <= y4) y2 = y3;
+ 
+            // bottom part
+            if(y3 <= y11 && y11 <= y4) y11 = y4;
+ 
+        }
+        
+    }
+ 
+    if((y2-y11) > 0 && (x2-x1) > 0) cout << "YES" << endl;
+    else cout << "NO" << endl;
+ 
+    return 0;
+}
